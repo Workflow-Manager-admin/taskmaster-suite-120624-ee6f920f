@@ -1,0 +1,176 @@
+.task-filter {
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.filter-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.filter-section {
+  margin-bottom: 24px;
+}
+
+.filter-section:last-child {
+  margin-bottom: 0;
+}
+
+.filter-section h4 {
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+}
+
+.filter-option:hover {
+  background-color: var(--bg-secondary);
+}
+
+.filter-option input[type="radio"] {
+  margin: 0;
+  cursor: pointer;
+}
+
+.filter-option span {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.filter-option input[type="radio"]:checked + span {
+  color: #1976D2;
+  font-weight: 600;
+}
+
+/* Priority filter colors */
+.filter-option.priority-critical:hover {
+  background-color: rgba(123, 31, 162, 0.1);
+}
+
+.filter-option.priority-urgent:hover {
+  background-color: rgba(173, 20, 87, 0.1);
+}
+
+.filter-option.priority-high:hover {
+  background-color: rgba(198, 40, 40, 0.1);
+}
+
+.filter-option.priority-medium:hover {
+  background-color: rgba(239, 108, 0, 0.1);
+}
+
+.filter-option.priority-low:hover {
+  background-color: rgba(46, 125, 50, 0.1);
+}
+
+.filter-option.priority-critical input[type="radio"]:checked + span {
+  color: #7b1fa2;
+}
+
+.filter-option.priority-urgent input[type="radio"]:checked + span {
+  color: #ad1457;
+}
+
+.filter-option.priority-high input[type="radio"]:checked + span {
+  color: #c62828;
+}
+
+.filter-option.priority-medium input[type="radio"]:checked + span {
+  color: #ef6c00;
+}
+
+.filter-option.priority-low input[type="radio"]:checked + span {
+  color: #2e7d32;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px;
+  padding-right: 30px;
+}
+
+[data-theme="dark"] .filter-select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23ccc' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+}
+
+.filter-select:hover {
+  border-color: #1976D2;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #1976D2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+/* Clear button styling */
+.filter-header .btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .task-filter {
+    padding: 16px;
+  }
+  
+  .filter-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .filter-options {
+    gap: 6px;
+  }
+  
+  .filter-option {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+}

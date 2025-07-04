@@ -18,6 +18,40 @@
   height: 72px;
   max-width: 1200px;
   margin: 0 auto;
+  gap: 24px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.nav-link.active {
+  background-color: #1976D2;
+  color: white;
+  border-color: #1976D2;
+}
+
+.nav-link.active:hover {
+  background-color: #1565C0;
 }
 
 .dashboard-nav h1 {
@@ -161,7 +195,14 @@
     font-size: 20px;
   }
   
+  .nav-links {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+  }
+  
   .user-actions {
+    order: 2;
     flex-direction: column;
     gap: 8px;
   }
