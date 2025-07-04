@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import authService from '../services/authService';
+import { useAuth } from '../contexts/AuthContext';
+import LoadingSpinner from './LoadingSpinner';
 
 // PUBLIC_INTERFACE
 /**
@@ -10,7 +11,11 @@ import authService from '../services/authService';
  * @returns {JSX.Element} Protected route component
  */
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = authService.isAuthenticated();
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return <LoadingSpinner message="Verifying authentication..." />;
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

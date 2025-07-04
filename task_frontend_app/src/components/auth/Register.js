@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import authService from '../../services/authService';
+import { useAuth } from '../../contexts/AuthContext';
 import './Auth.css';
 
 // PUBLIC_INTERFACE
@@ -16,8 +16,20 @@ const Register = () => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { register, loading, error, clearError, isAuthenticated } = useAuth();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Clear errors when component mounts
+  useEffect(() => {
+    clearError();
+  }, [clearError]);
 
   // PUBLIC_INTERFACE
   /**
@@ -88,17 +100,14 @@ const Register = () => {
       return;
     }
 
-    setLoading(true);
     setErrors({});
 
     try {
       const { confirmPassword, ...userData } = formData;
-      await authService.register(userData);
+      await register(userData);
       navigate('/dashboard');
     } catch (error) {
       setErrors({ submit: error.message });
-    } finally {
-      setLoading(false);
     }
   };
 

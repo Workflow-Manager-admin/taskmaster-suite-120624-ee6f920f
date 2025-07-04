@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import TaskList from './TaskList';
-import authService from '../services/authService';
 import './Dashboard.css';
 
 // PUBLIC_INTERFACE
@@ -10,21 +10,16 @@ import './Dashboard.css';
  * @returns {JSX.Element} Dashboard component
  */
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    const currentUser = authService.getCurrentUser();
-    setUser(currentUser);
-  }, []);
+  const { user, logout } = useAuth();
 
   // PUBLIC_INTERFACE
   /**
    * Handle user logout
    */
   const handleLogout = () => {
-    authService.logout();
+    logout();
   };
 
   // PUBLIC_INTERFACE

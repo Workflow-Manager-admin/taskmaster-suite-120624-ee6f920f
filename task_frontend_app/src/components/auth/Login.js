@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import authService from '../../services/authService';
+import { useAuth } from '../../contexts/AuthContext';
 import './Auth.css';
 
 // PUBLIC_INTERFACE
@@ -14,8 +14,20 @@ const Login = () => {
     password: ''
   });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login, loading, error, clearError, isAuthenticated } = useAuth();
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Clear errors when component mounts
+  useEffect(() => {
+    clearError();
+  }, [clearError]);
 
   // PUBLIC_INTERFACE
   /**
@@ -74,16 +86,13 @@ const Login = () => {
       return;
     }
 
-    setLoading(true);
     setErrors({});
 
     try {
-      await authService.login(formData);
+      await login(formData);
       navigate('/dashboard');
     } catch (error) {
       setErrors({ submit: error.message });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -126,9 +135,9 @@ const Login = () => {
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
 
-          {errors.submit && (
+          {(errors.submit || error) && (
             <div className="error-banner">
-              {errors.submit}
+              {errors.submit || error}
             </div>
           )}
 
